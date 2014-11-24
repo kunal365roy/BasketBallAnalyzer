@@ -2,7 +2,6 @@ import pandas as pd
 import copper 
 import requests
 from bs4 import BeautifulSoup
-#copper.project.path = '../../'
 
 url = 'http://espn.go.com/nba/teams'
 r = requests.get(url)
@@ -22,10 +21,9 @@ for table in tables:
         teams_urls.append(url)
         prefix_1.append(url.split('/')[-2])
         prefix_2.append(url.split('/')[-1])
-
 dic = {'url': teams_urls, 'prefix_2': prefix_2, 'prefix_1': prefix_1}
 teams = pd.DataFrame(dic, index=teams)
 teams.index.name = 'team'
-print(teams)
-#copper.save(teams, 'teams')
-teams.to_csv()
+#print(teams)
+with open("teamsites.csv", 'wb') as o:
+    teams.to_csv(o)
